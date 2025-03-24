@@ -19,11 +19,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className=" bg-black {`${geistSans.variable} ${geistMono.variable} antialiased`}"
-      >
-        {children}
-      </body>
+      <head>
+        <script src="https://docs.opencv.org/4.10.0/opencv.js" async />
+      </head>
+      <body className="bg-black">{children}</body>
     </html>
   );
 }

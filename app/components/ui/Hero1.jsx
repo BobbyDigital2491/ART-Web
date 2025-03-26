@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion"; 
 import Link from "next/link";
 import Navbar from "./Navbar";
+import HeroVideo from "./HeroVideo";
 
 const Hero1 = () => {
   // Navbar Component Logic
@@ -86,13 +87,7 @@ const Hero1 = () => {
           className="relative z-10 mt-20 rounded-3xl border border-slate-200 bg-neutral-100 p-4 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
         >
           <div className="w-full overflow-hidden rounded-xl border border-slate-200 dark:border-gray-700">
-            <Image
-              src="https://peach-informal-llama-875.mypinata.cloud/ipfs/QmUx6g6LpkNzW8mmqJH7NQnkP2ViC6bRXnx6aaHFxGPHpq"
-              alt="Landing page preview"
-              className="aspect-[16/9] h-auto w-full object-cover"
-              height={1000}
-              width={1000}
-            />
+            <HeroVideo/>
           </div>
         </motion.div>
       </div>

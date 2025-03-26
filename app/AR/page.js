@@ -271,6 +271,7 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen relative w-screen h-screen">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <head><link rel="icon" href="/logo.png" type="image/png" /></head>
       <h1
         className="text-3xl font-bold text-white mb-4 z-10"
         style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)", textAlign: "center" }}

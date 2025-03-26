@@ -11,7 +11,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Enhanced SEO metadata
 export const metadata = {
   title: "ART Emerged Web - Unique Clothing Collections",
   description:
@@ -43,22 +42,14 @@ export const metadata = {
     image: "https://art-web-nu.vercel.app/logo.png",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/logo.png", // Matches primary favicon
   },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <script src="https://docs.opencv.org/4.10.0/opencv.js" async />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" /></head>
+      <head><link rel="icon" href="/logo.png?v=2" type="image/png" /><script src="https://docs.opencv.org/4.10.0/opencv.js" async /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#000000" /></head>
       <body className="bg-black">{children}</body>
     </html>
   );

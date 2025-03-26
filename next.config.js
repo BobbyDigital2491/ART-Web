@@ -30,6 +30,14 @@ const nextConfig = {
           protocol: "https",
           hostname: "s3.amazonaws.com",
         },
+        {
+          protocol: "https",
+          hostname: "tailwindcss.com",
+        },
+        {
+          protocol: "https",
+          hostname: "tailwindui.com",
+        }
       ],
     },
   };

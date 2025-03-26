@@ -60,7 +60,7 @@ const Navbar = () => {
               layoutId="active"
               className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-x-auto border border-black/[0.2] shadow-xl dark:border-slate-800"
             >
-              <motion.div layout className="flex flex-row p-4 space-x-4">
+              <motion.div layout className="flex flex-col p-4 space-x-4">
                 {children}
               </motion.div>
             </motion.div>
@@ -124,13 +124,13 @@ const Navbar = () => {
             title="ARt Emerged App"
             description="Native app for iOS & Android devices."
             href="/Art-Emerged-App"
-            src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true"
+            src="https://wallpapers.com/images/hd/android-apple-xddzdvfueo0kfvj7.jpg"
           />
           <ProductItem
             title="Product 2"
             description="Another great item"
             href="/products/2"
-            src="https://via.placeholder.com/140x70"
+            src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true"
           />
           <HoveredLink href="/products">View All</HoveredLink>
         </MenuItem>

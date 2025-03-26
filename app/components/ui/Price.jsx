@@ -81,10 +81,10 @@ const Price = () => {
     <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
       {/* Title */}
       <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-        <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+        <h2 className="text-2xl text-white font-bold md:text-4xl md:leading-tight dark:text-white">
           Pricing
         </h2>
-        <p className="mt-1 text-gray-600 dark:text-neutral-400">
+        <p className="mt-1 text-gray-200 dark:text-gray-200">
           Whatever your status, our offers evolve according to your needs.
         </p>
       </div>
@@ -93,7 +93,7 @@ const Price = () => {
       {/* Switch */}
       <div className="flex justify-center items-center gap-x-3">
         <span
-          className={`text-sm font-medium ${!isAnnual ? "text-gray-800 dark:text-neutral-200" : "text-gray-500 dark:text-neutral-400"}`}
+          className={`text-sm font-medium ${!isAnnual ? "text-white dark:text-white" : "text-gray-500 dark:text-white"}`}
         >
           Monthly
         </span>
@@ -104,11 +104,11 @@ const Price = () => {
             checked={isAnnual}
             onChange={handleToggle}
           />
-          <div className="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-blue-600 dark:bg-neutral-700 dark:peer-checked:bg-blue-500 transition-colors duration-200 ease-in-out"></div>
+          <div className="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-yellow-400 dark:bg-neutral-700 dark:peer-checked:bg-yellow-500 transition-colors duration-200 ease-in-out"></div>
           <div className="absolute w-5 h-5 bg-white rounded-full top-0.5 left-0.5 peer-checked:translate-x-full transform transition-transform duration-200 ease-in-out dark:bg-neutral-400 dark:peer-checked:bg-white"></div>
         </label>
         <span
-          className={`text-sm font-medium relative ${isAnnual ? "text-gray-800 dark:text-neutral-200" : "text-gray-500 dark:text-neutral-400"}`}
+          className={`text-sm font-medium relative ${isAnnual ? "text-white dark:text-white" : "text-gray-500 dark:text-white"}`}
         >
           Annually
           {isAnnual && (
@@ -127,7 +127,7 @@ const Price = () => {
                   className="fill-gray-300 dark:fill-neutral-700"
                 />
               </svg>
-              <span className="mt-3 inline-block whitespace-nowrap text-[11px] leading-5 font-semibold uppercase bg-blue-600 text-white rounded-full py-1 px-2.5">
+              <span className="mt-3 inline-block whitespace-nowrap text-[11px] leading-5 font-semibold uppercase bg-yellow-400 text-white rounded-full py-1 px-2.5">
                 Save up to 10%
               </span>
             </span>
@@ -143,13 +143,13 @@ const Price = () => {
             key={plan.name}
             className={`flex flex-col border text-center rounded-xl p-8 ${
               plan.name === "Startup"
-                ? "border-2 border-blue-600 shadow-xl dark:border-blue-700"
+                ? "border-2 border-yellow-400 shadow-xl dark:border-yellow-600"
                 : "border-gray-200 dark:border-neutral-800"
             }`}
           >
             {plan.name === "Startup" && (
               <p className="mb-3">
-                <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-xs uppercase font-semibold bg-blue-100 text-blue-800 dark:bg-blue-600 dark:text-white">
+                <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-xs uppercase font-semibold bg-blue-100 text-yellow-400 dark:bg-blue-600 dark:text-white">
                   Most popular
                 </span>
               </p>
@@ -157,7 +157,7 @@ const Price = () => {
             <h4 className="font-medium text-lg text-gray-800 dark:text-neutral-200">
               {plan.name}
             </h4>
-            <span className="mt-5 font-bold text-5xl text-gray-800 dark:text-neutral-200">
+            <span className="mt-5 font-bold text-5xl text-white dark:text-white">
               {plan.name === "Free" ? (
                 "Free"
               ) : (
@@ -189,7 +189,7 @@ const Price = () => {
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-gray-800 dark:text-neutral-400">
+                <span className="text-white dark:text-white">
                   {plan.users}
                 </span>
               </li>
@@ -208,7 +208,7 @@ const Price = () => {
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-gray-800 dark:text-neutral-400">
+                <span className="text-white dark:text-neutral-400">
                   Plan features
                 </span>
               </li>
@@ -227,7 +227,7 @@ const Price = () => {
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-gray-800 dark:text-neutral-400">
+                <span className="text-white dark:text-white">
                   Product support
                 </span>
               </li>
@@ -236,7 +236,7 @@ const Price = () => {
               href="#"
               className={`mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border shadow-2xs ${
                 plan.name === "Startup"
-                  ? "bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700 dark:border-transparent"
+                  ? "bg-yellow-400 text-white hover:bg-yellow-600 focus:bg-yellow-600 dark:border-transparent"
                   : "border-gray-200 bg-white text-gray-800 hover:bg-gray-50 focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
               } disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden`}
             >

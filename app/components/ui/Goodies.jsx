@@ -5,14 +5,14 @@ const Goodies = () => {
         <section className="py-12 bg-black sm:py-16 lg:py-20">
     <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="max-w-md mx-auto text-center">
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">Our featured items</h2>
+            <h2 className="text-2xl font-bold text-white sm:text-3xl">Limited edition featured items</h2>
             <p className="mt-4 text-base font-normal leading-7 text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus faucibus massa dignissim tempus.</p>
         </div>
 
         <div className="grid grid-cols-2 gap-6 mt-10 lg:mt-16 lg:gap-4 lg:grid-cols-4">
             <div className="relative group">
                 <div className="overflow-hidden aspect-w-1 aspect-h-1">
-                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-1.png" alt="" />
+                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true" alt="" />
                 </div>
                 <div className="absolute left-3 top-3">
                     <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-white rounded-full">New</p>
@@ -21,7 +21,7 @@ const Goodies = () => {
                     <div>
                         <h3 className="text-xs font-bold text-white sm:text-sm md:text-base">
                             <a href="#" title="">
-                                Beoplay M5 Bluetooth Speaker
+                                Nexxus ARt Emerged Hoodie
                                 <span className="absolute inset-0" aria-hidden="true"></span>
                             </a>
                         </h3>
@@ -62,7 +62,7 @@ const Goodies = () => {
 
             <div className="relative group">
                 <div className="overflow-hidden aspect-w-1 aspect-h-1">
-                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-2.png" alt="" />
+                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true" alt="" />
                 </div>
                 <div className="flex items-start justify-between mt-4 space-x-4">
                     <div>
@@ -109,7 +109,7 @@ const Goodies = () => {
 
             <div className="relative group">
                 <div className="overflow-hidden aspect-w-1 aspect-h-1">
-                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-3.png" alt="" />
+                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true" alt="" />
                 </div>
                 <div className="absolute left-3 top-3">
                     <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-gray-900 rounded-full">Sale</p>
@@ -160,7 +160,7 @@ const Goodies = () => {
 
             <div className="relative group">
                 <div className="overflow-hidden aspect-w-1 aspect-h-1">
-                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/item-cards/4/product-4.png" alt="" />
+                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125" src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true" alt="" />
                 </div>
                 <div className="flex items-start justify-between mt-4 space-x-4">
                     <div>

@@ -127,8 +127,8 @@ const Navbar = () => {
             src="https://wallpapers.com/images/hd/android-apple-xddzdvfueo0kfvj7.jpg"
           />
           <ProductItem
-            title="Product 2"
-            description="Another great item"
+            title="Merchandise"
+            description="Check out our limited edition merch "
             href="/products/2"
             src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true"
           />
@@ -140,7 +140,7 @@ const Navbar = () => {
             title="Solution 1"
             description="Solve your problems"
             href="/solutions/1"
-            src="https://via.placeholder.com/140x70"
+            src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true"
           />
           <HoveredLink href="/solutions">Learn More</HoveredLink>
         </MenuItem>

@@ -7,6 +7,7 @@ import Goodies from "../components/ui/Goodies";
 import Header from "../components/ui/Header";
 
 import ImageHero from "../components/ui/ImageHero";
+import ShopHero from "../components/ui/ShopHero";
 
 const Page = () => {
 
@@ -20,12 +21,13 @@ const Page = () => {
     <div className="bg-black">
       <Header />
       <Navbar />
-      <ImageHero images={images} autoplay={true} direction="up" className="h-screen">
+      <ShopHero/>
+       {/*<ImageHero images={images} autoplay={true} direction="up" className="h-screen">
         <div className="relative z-50 text-white text-center">
           <h1 className="text-4xl font-bold">Welcome to Our Store</h1>
           <p className="text-xl mt-4">Explore our latest collections</p>
         </div>
-      </ImageHero>
+      </ImageHero>*/}
       <MagicText words="Products" className="text-9xl text-center text-white" />
       <Goodies />
     </div>

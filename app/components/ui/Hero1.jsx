@@ -51,9 +51,9 @@ const Hero1 = () => {
       </video>
       {/* Gradient Overlay */}
       <div className="absolute inset-0 h-full w-full bg-black/50 z-0">
-        <div className="absolute top-0 left-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
-        <div className="absolute top-0 right-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+        <div className="absolute top-0 left-0 h-40 w-px bg-gradient-to-b from-transparent via-yellow-400 to-transparent" />
+        <div className="absolute top-0 right-0 h-40 w-px bg-gradient-to-b from-transparent via-yellow-400 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 mx-auto h-px w-40 bg-gradient-to-r from-transparent via-yellow-400 to-transparent" />
       </div>
       <div className="relative z-10 px-4 py-10 md:py-20">
         <h1 className="mx-auto max-w-4xl text-center text-2xl font-bold text-yellow-400 md:text-4xl lg:text-7xl dark:text-slate-300">

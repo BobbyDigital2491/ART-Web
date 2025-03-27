@@ -154,7 +154,7 @@ const Price = () => {
                 </span>
               </p>
             )}
-            <h4 className="font-medium text-lg text-gray-800 dark:text-neutral-200">
+            <h4 className="font-medium text-lg text-gray-400 dark:text-neutral-200">
               {plan.name}
             </h4>
             <span className="mt-5 font-bold text-5xl text-white dark:text-white">
@@ -176,7 +176,7 @@ const Price = () => {
             <ul className="mt-7 space-y-2.5 text-sm">
               <li className="flex gap-x-2">
                 <svg
-                  className="shrink-0 mt-0.5 size-4 text-blue-600 dark:text-blue-500"
+                  className="shrink-0 mt-0.5 size-4 text-yellow-400 dark:text-yellow-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -195,7 +195,7 @@ const Price = () => {
               </li>
               <li className="flex gap-x-2">
                 <svg
-                  className="shrink-0 mt-0.5 size-4 text-blue-600 dark:text-blue-500"
+                  className="shrink-0 mt-0.5 size-4 text-yellow-400 dark:text-yellow-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -214,7 +214,7 @@ const Price = () => {
               </li>
               <li className="flex gap-x-2">
                 <svg
-                  className="shrink-0 mt-0.5 size-4 text-blue-600 dark:text-blue-500"
+                  className="shrink-0 mt-0.5 size-4 text-yellow-400 dark:text-yellow-400"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -260,7 +260,7 @@ const Price = () => {
           {plans.map((plan) => (
             <section key={plan.name}>
               <div className="px-4 mb-4">
-                <h2 className="text-lg leading-6 font-medium text-gray-800 dark:text-neutral-200">
+                <h2 className="text-lg leading-6 font-medium text-gray-200 dark:text-neutral-200">
                   {plan.name}
                 </h2>
               </div>
@@ -290,7 +290,7 @@ const Price = () => {
                         className="border-t border-gray-200 dark:border-neutral-700"
                       >
                         <th
-                          className="py-5 px-4 text-sm font-normal text-gray-600 text-start whitespace-nowrap dark:text-neutral-400"
+                          className="py-5 px-4 text-sm font-normal text-gray-200 text-start whitespace-nowrap dark:text-neutral-400"
                           scope="row"
                         >
                           {feature}
@@ -392,7 +392,7 @@ const Price = () => {
                         <td key={plan.name} className="py-5 px-6">
                           {plan.features[category].includes(feature) ? (
                             <svg
-                              className="mx-auto shrink-0 size-5 text-blue-600 dark:text-blue-500"
+                              className="mx-auto shrink-0 size-5 text-yellow-400 dark:text-yellow-400"
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
                               height="24"
@@ -407,7 +407,7 @@ const Price = () => {
                             </svg>
                           ) : (
                             <svg
-                              className="mx-auto shrink-0 size-5 text-gray-400 dark:text-neutral-600"
+                              className="mx-auto shrink-0 size-5 text-gray-200 dark:text-neutral-200"
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
                               height="24"

@@ -119,7 +119,13 @@ const Navbar = () => {
         </Link>
 
         {/* Menu Items with Dropdowns */}
-        <MenuItem item="Products">
+        <MenuItem item="About">
+          <ProductItem
+            title="Our Team"
+            description="Meet The Founders."
+            href="/Team"
+            src="https://peach-informal-llama-875.mypinata.cloud/ipfs/QmeMYDS3orN1WcVivaH46S2CjvAFmh7R5DFdkqWYdSqETN"
+          />
           <ProductItem
             title="ARt Emerged App"
             description="Native app for iOS & Android devices."
@@ -129,7 +135,7 @@ const Navbar = () => {
           <ProductItem
             title="Merchandise"
             description="Check out our limited edition merch "
-            href="/products/2"
+            href="/products"
             src="https://img1.wsimg.com/isteam/ip/67f024bd-8725-4051-8f8c-647aad4b7d78/ols/IMG_2857.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:600,h:600,cg:true"
           />
           <HoveredLink href="/products">View All</HoveredLink>

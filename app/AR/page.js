@@ -10,6 +10,12 @@ export default function Home() {
   const rendererRef = useRef(null);
   const isPlaying = useRef(false);
   const lastPosition = useRef(null);
+  const lastDetectionState = useRef(false);
+  const detectionCount = useRef(0);
+  const lastTrackTime = useRef(0);
+  const playPromise = useRef(null);
+  const lastDetectedSize = useRef(null);
+  const debug = useRef(false);
 
   useEffect(() => {
     const waitForOpenCV = async () => {
@@ -92,7 +98,7 @@ export default function Home() {
       // Canvas for OpenCV processing
       const canvas = document.createElement("canvas");
       canvasRef.current = canvas;
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
       // Load reference image (Yoda.png) into a canvas
       try {
@@ -109,9 +115,9 @@ export default function Home() {
           };
         });
 
-        // Single high-quality template
+        // High-resolution template
         const refCanvas = document.createElement("canvas");
-        const maxTemplateSize = 150;
+        const maxTemplateSize = 200;
         refCanvas.width = Math.min(refImage.width, maxTemplateSize);
         refCanvas.height = Math.min(refImage.height, maxTemplateSize * (refImage.height / refImage.width));
         const refCtx = refCanvas.getContext("2d");
@@ -119,40 +125,55 @@ export default function Home() {
         console.log("Yoda.png template size:", refCanvas.width, refCanvas.height);
 
         // Tracking loop
-        const trackImage = () => {
+        const trackImage = async () => {
+          const now = performance.now();
+          if (now - lastTrackTime.current < 200) {
+            requestAnimationFrame(trackImage);
+            return;
+          }
+          lastTrackTime.current = now;
+
           if (!video.videoWidth || !video.videoHeight || !window.cv) {
             console.log("Waiting for video or OpenCV...");
             requestAnimationFrame(trackImage);
             return;
           }
 
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          ctx.drawImage(video, 0, 0);
-          console.log("Frame captured");
+          // Downscale source image
+          canvas.width = video.videoWidth / 2;
+          canvas.height = video.videoHeight / 2;
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
           let srcMat, templMat, bestMatch = { maxVal: 0, maxLoc: null, scale: 1 };
           try {
             srcMat = cv.imread(canvas);
             templMat = cv.imread(refCanvas);
 
-            // Multi-scale source image resizing with finer steps
-            const scales = [1.5, 1.25, 1.0, 0.75, 0.5, 0.35, 0.2];
+            // Validate matrices
+            if (!srcMat || srcMat.empty() || !templMat || templMat.empty()) {
+              throw new Error("Invalid source or template matrix");
+            }
+
+            // Reduced scales
+            const scales = [2.0, 1.5, 1.0, 0.5];
             for (const scale of scales) {
               const scaledMat = new cv.Mat();
               const size = new cv.Size(Math.floor(srcMat.cols * scale), Math.floor(srcMat.rows * scale));
-              cv.resize(srcMat, scaledMat, size, 0, 0, cv.INTER_AREA);
 
-              if (scaledMat.cols < templMat.cols || scaledMat.rows < templMat.rows) {
+              if (size.width < templMat.cols || size.height < templMat.rows) {
                 scaledMat.delete();
                 continue;
               }
+
+              cv.resize(srcMat, scaledMat, size, 0, 0, cv.INTER_AREA);
 
               const resultMat = new cv.Mat();
               cv.matchTemplate(scaledMat, templMat, resultMat, cv.TM_CCOEFF_NORMED);
               const { maxLoc, maxVal } = cv.minMaxLoc(resultMat);
 
-              console.log(`Scale ${scale} - Match confidence: ${maxVal}, Position: ${maxLoc.x},${maxLoc.y}`);
+              if (debug.current) {
+                console.log(`Scale ${scale} - Match confidence: ${maxVal}, Position: ${maxLoc.x},${maxLoc.y}`);
+              }
 
               if (maxVal > bestMatch.maxVal) {
                 bestMatch = { maxVal, maxLoc, scale };
@@ -162,65 +183,99 @@ export default function Home() {
               resultMat.delete();
             }
 
-            const threshold = 0.65; // Slightly lower for distance
+            const threshold = 0.75;
             const isValidMatch = bestMatch.maxVal > threshold && (
               !lastPosition.current || 
-              Math.abs(bestMatch.maxLoc.x / bestMatch.scale - lastPosition.current.x) < 30 &&
-              Math.abs(bestMatch.maxLoc.y / bestMatch.scale - lastPosition.current.y) < 30
+              Math.abs(bestMatch.maxLoc.x / bestMatch.scale - lastPosition.current.x) < 15 &&
+              Math.abs(bestMatch.maxLoc.y / bestMatch.scale - lastPosition.current.y) < 15
             );
 
             if (isValidMatch) {
-              console.log("Target found, playing video");
-              const { maxLoc, scale } = bestMatch;
-              const templateWidth = templMat.cols;
-              const templateHeight = templMat.rows;
-              const x = (maxLoc.x / scale + templateWidth / 2 - video.videoWidth / 2) / 40;
-              const y = -((maxLoc.y / scale + templateHeight / 2 - video.videoHeight / 2) / 40);
-              videoPlane.position.set(x, y, -2);
+              detectionCount.current += 1;
+              if (detectionCount.current >= 5) {
+                if (!lastDetectionState.current) {
+                  console.log("Target found, playing video");
+                  lastDetectionState.current = true;
+                }
 
-              // Scale video to match detected size
-              const scaleFactor = 0.1; // Adjusted for better fit
-              const detectedWidth = templateWidth / scale;
-              const detectedHeight = templateHeight / scale;
-              const width = detectedWidth * scaleFactor;
-              const height = detectedHeight * scaleFactor;
-              videoPlane.scale.set(width, height, 1);
-              console.log("Video scale:", width, height, "Detected size:", detectedWidth, detectedHeight);
+                const { maxLoc, scale } = bestMatch;
+                const templateWidth = templMat.cols;
+                const templateHeight = templMat.rows;
+                const detectedWidth = templateWidth / scale;
+                const detectedHeight = templateHeight / scale;
+                const frameWidth = canvas.width;
+                const frameHeight = canvas.height;
 
-              lastPosition.current = { x: maxLoc.x / scale, y: maxLoc.y / scale };
+                // Center video on target
+                const x = ((maxLoc.x / scale + templateWidth / 2) / frameWidth - 0.5) * 4 * aspectRatio;
+                const y = -((maxLoc.y / scale + templateHeight / 2) / frameHeight - 0.5) * 4;
+                videoPlane.position.set(x, y, -2);
 
-              if (!videoElement.src) {
-                videoElement.src = videoUrl;
-                console.log("Video src set:", videoUrl);
-              }
-              if (!texture) {
-                texture = new THREE.VideoTexture(videoElement);
-                videoMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-                videoPlane.material = videoMaterial;
-              }
+                // Dynamic scaling
+                const scaleFactor = 0.5 * (detectedWidth / frameWidth) * 12;
+                const width = detectedWidth * scaleFactor;
+                const height = detectedHeight * scaleFactor;
+                videoPlane.scale.set(width, height, 1);
 
-              videoPlane.visible = true;
-              videoElement.muted = false;
-              if (!isPlaying.current) {
-                videoElement.play().catch((e) => console.error("Video play failed:", e));
-                isPlaying.current = true;
+                // Log only if size changes significantly
+                if (!lastDetectedSize.current || Math.abs(detectedWidth - lastDetectedSize.current) > 0.1 * detectedWidth) {
+                  console.log("Video scale:", width, height, "Detected size:", detectedWidth, detectedHeight, "Scale factor:", scaleFactor);
+                  lastDetectedSize.current = detectedWidth;
+                }
+
+                lastPosition.current = { x: maxLoc.x / scale, y: maxLoc.y / scale };
+
+                if (!videoElement.src) {
+                  videoElement.src = videoUrl;
+                  console.log("Video src set:", videoUrl);
+                }
+                if (!texture) {
+                  texture = new THREE.VideoTexture(videoElement);
+                  videoMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+                  videoPlane.material = videoMaterial;
+                }
+
+                videoPlane.visible = true;
+                videoElement.muted = false;
+                if (!isPlaying.current) {
+                  try {
+                    playPromise.current = videoElement.play();
+                    await playPromise.current;
+                    console.log("Video playback started");
+                    isPlaying.current = true;
+                  } catch (e) {
+                    console.error("Video play failed:", e);
+                  }
+                }
               }
             } else {
-              console.log("Target lost or not detected, stopping video");
-              videoPlane.visible = false;
-              videoElement.muted = true;
-              if (isPlaying.current) {
-                videoElement.pause();
-                videoElement.currentTime = 0;
-                isPlaying.current = false;
+              detectionCount.current -= 1;
+              if (detectionCount.current <= 0) {
+                detectionCount.current = 0;
+                if (lastDetectionState.current) {
+                  console.log("Target lost or not detected, stopping video");
+                  lastDetectionState.current = false;
+                  if (isPlaying.current) {
+                    if (playPromise.current) {
+                      await playPromise.current.catch(() => {});
+                    }
+                    videoElement.pause();
+                    videoElement.currentTime = 0;
+                    console.log("Video playback paused");
+                    isPlaying.current = false;
+                  }
+                  videoPlane.visible = false;
+                  videoElement.muted = true;
+                  lastPosition.current = null;
+                  lastDetectedSize.current = null;
+                }
               }
-              lastPosition.current = null;
             }
           } catch (error) {
-            console.error("Tracking error:", error);
+            console.error("Tracking error:", error.message || error);
           } finally {
-            if (srcMat) srcMat.delete();
-            if (templMat) templMat.delete();
+            if (srcMat && !srcMat.isDeleted()) srcMat.delete();
+            if (templMat && !templMat.isDeleted()) templMat.delete();
           }
 
           requestAnimationFrame(trackImage);
@@ -271,7 +326,6 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen relative w-screen h-screen">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <head><link rel="icon" href="/logo.png" type="image/png" /></head>
       <h1
         className="text-3xl font-bold text-white mb-4 z-10"
         style={{ fontSize: "clamp(1.5rem, 5vw, 3rem)", textAlign: "center" }}

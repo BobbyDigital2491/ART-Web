@@ -37,7 +37,16 @@ const nextConfig = {
         {
           protocol: "https",
           hostname: "tailwindui.com",
+        },
+        {
+          protocol: "https",
+          hostname: "img.freepik.com",
+        },
+        {
+          protocol: "https",
+          hostname: "scontent-lga3-2.xx.fbcdn.net",
         }
+
       ],
     },
   };

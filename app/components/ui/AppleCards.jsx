@@ -11,7 +11,7 @@ const AppleCards = () => {
 
   return (
     <div className="w-full h-full py-20 bg-black">
-      <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-5xl font-bold text-white font-sans">
+      <h2 className="max-w-7xl pl-4 text-center mx-auto text-xl md:text-5xl font-bold text-white font-sans">
         Discover ARt Emerged
       </h2>
       <Carousel items={cards} />

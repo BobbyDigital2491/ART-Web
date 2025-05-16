@@ -10,7 +10,7 @@ const HeroVideo = () => {
         className="block dark:hidden"
         animationStyle="from-center"
         videoSrc="https://www.youtube.com/embed/dQw4w9WgXcQ?si=Yazom2a4Y2x6clX3"
-        thumbnailSrc="https://startup-template-sage.vercel.app/hero-light.png"
+        thumbnailSrc="https://img.freepik.com/premium-photo/black-woman-using-augmented-reality-panel-office-future-work-cloud-computing-ai-network_146482-12784.jpg"
         thumbnailAlt="Hero Video"
       />
       <HeroVideoDialog

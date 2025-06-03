@@ -7,4 +7,4 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error("Missing Supabase URL or Anon Key");
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey); 
